@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\wwwroot\PUBLI\API\WebApplication1\WebApplication1\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-10-31T19:11:40.3292071Z;True|2023-10-31T14:27:01.9289436-03:00;True|2023-10-30T15:36:35.8884184-03:00;True|2023-10-30T15:33:12.1431275-03:00;True|2023-10-30T15:21:17.2378102-03:00;False|2023-10-30T15:18:05.0934217-03:00;True|2023-10-27T16:46:47.4359423-03:00;</History>
+    <LastFailureDetails />
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+</Project>

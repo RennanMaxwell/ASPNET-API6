@@ -10,6 +10,7 @@ using System.IO;
 
 namespace WebApplication1.Controllers
 {
+    // Route API access between url htt://myaddress:5127/api....
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -23,6 +24,8 @@ namespace WebApplication1.Controllers
             _env = env;
         }
 
+        // Method GET for capture data in sql server. select all fields and data.
+
         [HttpGet]
         public JsonResult Get()
         {
@@ -32,10 +35,11 @@ namespace WebApplication1.Controllers
                     convert(varchar(10),DT_FINAL,120) as DT_FINAL,GRUPO,
                     PERCENTUAL_RATEIO,CCUSTO_CLI,ORDEM_INTERNA
                     from 
-                    dbo.ims_investimento_produto_dev
+                    dbo.ims_investimento_produto
                     ";
 
             DataTable table = new DataTable();
+            // connection string
             string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
@@ -44,6 +48,7 @@ namespace WebApplication1.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
 
+                    // Execute script sql for show data in screem
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -55,17 +60,18 @@ namespace WebApplication1.Controllers
             return new JsonResult(table);
         }
 
-        
+        // Method POST for insert data in sql server. insert with script bellow.
         [HttpPost]
         public JsonResult Post(Product prod)
         {
             string query = @"
-                    insert into dbo.ims_investimento_produto_dev
+                    insert into dbo.ims_investimento_produto
                     (PRODUTO_PUBLI,PRODUTO_FINAL,DIVISOR,DT_INICIAL,DT_FINAL,GRUPO,PERCENTUAL_RATEIO,CCUSTO_CLI,ORDEM_INTERNA)
                     values (@PRODUTO_PUBLI,@PRODUTO_FINAL,@DIVISOR,@DT_INICIAL,@DT_FINAL,@GRUPO,@PERCENTUAL_RATEIO,@CCUSTO_CLI,@ORDEM_INTERNA)
                     ";
 
             DataTable table = new DataTable();
+            // connection string
             string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
@@ -82,6 +88,7 @@ namespace WebApplication1.Controllers
                     myCommand.Parameters.AddWithValue("@PERCENTUAL_RATEIO", prod.PERCENTUAL_RATEIO ?? (object)DBNull.Value);
                     myCommand.Parameters.AddWithValue("@CCUSTO_CLI", prod.CCUSTO_CLI);
                     myCommand.Parameters.AddWithValue("@ORDEM_INTERNA", prod.ORDEM_INTERNA);
+                    // Execute script sql for show data in screem
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -93,11 +100,12 @@ namespace WebApplication1.Controllers
             return new JsonResult("Added Successfully");
         }
 
+        // Method PUT for update data in sql server. update by ID with script bellow.
         [HttpPut]
         public JsonResult Put(Product prod)
         {
             string query = @"
-                    update dbo.ims_investimento_produto_dev 
+                    update dbo.ims_investimento_produto 
                     set PRODUTO_PUBLI=@PRODUTO_PUBLI,
                     PRODUTO_FINAL=@PRODUTO_FINAL,
                     DIVISOR=@DIVISOR,
@@ -111,6 +119,7 @@ namespace WebApplication1.Controllers
                     ";
 
             DataTable table = new DataTable();
+            // connection string
             string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
@@ -128,6 +137,7 @@ namespace WebApplication1.Controllers
                     myCommand.Parameters.AddWithValue("@PERCENTUAL_RATEIO", prod.PERCENTUAL_RATEIO ?? (object)DBNull.Value);
                     myCommand.Parameters.AddWithValue("@CCUSTO_CLI", prod.CCUSTO_CLI);
                     myCommand.Parameters.AddWithValue("@ORDEM_INTERNA", prod.ORDEM_INTERNA);
+                    // Execute script sql for show data in screem
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -139,15 +149,17 @@ namespace WebApplication1.Controllers
             return new JsonResult("Updated Successfully");
         }
 
+        // Method DELET for delete data in sql server. delete by ID with script bellow.
         [HttpDelete("{ID}")]
         public JsonResult Delete(int ID)
         {
             string query = @"
-                    delete from dbo.ims_investimento_produto_dev 
+                    delete from dbo.ims_investimento_produto 
                     where ID=@ID
                     ";
 
             DataTable table = new DataTable();
+            // connection string
             string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
@@ -156,6 +168,7 @@ namespace WebApplication1.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myCommand.Parameters.AddWithValue("@ID", ID);
+                    // Execute script sql for show data in screem
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();

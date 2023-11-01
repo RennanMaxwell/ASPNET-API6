@@ -1,5 +1,7 @@
 ﻿namespace WebApplication1.Models
 {
+    // model product for data api sql server capture and show in swagger
+    // Field sql server database publi.dbo.ims_investimento_produto
     public class Product
     {
 

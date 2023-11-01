@@ -53,6 +53,7 @@ namespace WebApplication1
 
             app.MapControllers();
 
+            // filepath usado para upload de fotos. Não será usado no momento... pode ser comentado antes de compilar
             app.UseStaticFiles(new StaticFileOptions
             { 
                 FileProvider = new PhysicalFileProvider(
